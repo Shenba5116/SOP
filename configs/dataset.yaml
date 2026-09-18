@@ -1,0 +1,14 @@
+# configs/dataset.yaml
+dataset:
+  name: "BRSET"
+  version: "v1.0.2"
+  data_dir: "data/raw/"
+  processed_dir: "data/processed/"
+  split_summary: "data/processed/split_summary.json"
+  image_size: 224
+  classes:
+    - "No DR"
+    - "Mild NPDR"
+    - "Moderate NPDR"
+    - "Severe NPDR"
+    - "Proliferative DR"

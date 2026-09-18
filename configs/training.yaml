@@ -1,0 +1,18 @@
+# configs/training.yaml
+training:
+  seed: 42
+  batch_size: 32
+  epochs: 50
+  learning_rate: 1.0e-4
+  weight_decay: 1.0e-4
+  image_size: 224
+  num_classes: 5
+  patience: 10
+  optimizer: "AdamW"
+  scheduler: "CosineAnnealingLR"
+  backbone: "efficientnet_b0"
+  freeze_backbone: true
+  mixed_precision: true
+  num_workers: 4
+  checkpoint_dir: "models/checkpoints/"
+  experiment_dir: "outputs/experiments/"
