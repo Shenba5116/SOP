@@ -14,6 +14,8 @@ from src.data.dataset import BRSETDataset
 from src.data.image_transforms import get_transforms
 from torch.utils.data import DataLoader
 
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
+
 def load_config(config_path="configs/training.yaml"):
     with open(config_path, "r") as f:
         return yaml.safe_load(f)
@@ -32,8 +34,8 @@ def get_model(model_name, num_classes, freeze_backbone):
 def train_epoch(model, loader, criterion, optimizer, device, model_name):
     model.train()
     running_loss = 0.0
-    correct = 0
-    total = 0
+    all_preds = []
+    all_targets = []
     
     for batch in tqdm(loader, desc="Training"):
         optimizer.zero_grad()
@@ -57,10 +59,64 @@ def train_epoch(model, loader, criterion, optimizer, device, model_name):
         
         running_loss += loss.item()
         _, predicted = outputs.max(1)
-        total += targets.size(0)
-        correct += predicted.eq(targets).sum().item()
+        all_preds.extend(predicted.cpu().numpy())
+        all_targets.extend(targets.cpu().numpy())
         
-    return running_loss / len(loader), correct / total
+    acc = accuracy_score(all_targets, all_preds)
+    prec = precision_score(all_targets, all_preds, average='macro', zero_division=0)
+    rec = recall_score(all_targets, all_preds, average='macro', zero_division=0)
+    f1 = f1_score(all_targets, all_preds, average='macro', zero_division=0)
+    
+    return {
+        "loss": running_loss / len(loader),
+        "accuracy": acc,
+        "precision": prec,
+        "recall": rec,
+        "f1_score": f1
+    }
+
+def validate_epoch(model, loader, criterion, device, model_name):
+    """
+    Evaluates model performance and calculates Accuracy, Precision, Recall, and F1 Score.
+    """
+    model.eval()
+    running_loss = 0.0
+    all_preds = []
+    all_targets = []
+    
+    with torch.no_grad():
+        for batch in tqdm(loader, desc="Validation"):
+            if model_name == "clinical_only":
+                _, clinical, targets = batch
+                clinical, targets = clinical.to(device), targets.to(device)
+                outputs = model(clinical)
+            elif model_name == "image_only":
+                images, targets = batch
+                images, targets = images.to(device), targets.to(device)
+                outputs = model(images)
+            else:
+                images, clinical, targets = batch
+                images, clinical, targets = images.to(device), clinical.to(device), targets.to(device)
+                outputs = model(images, clinical)
+                
+            loss = criterion(outputs, targets)
+            running_loss += loss.item()
+            _, predicted = outputs.max(1)
+            all_preds.extend(predicted.cpu().numpy())
+            all_targets.extend(targets.cpu().numpy())
+            
+    acc = accuracy_score(all_targets, all_preds)
+    prec = precision_score(all_targets, all_preds, average='macro', zero_division=0)
+    rec = recall_score(all_targets, all_preds, average='macro', zero_division=0)
+    f1 = f1_score(all_targets, all_preds, average='macro', zero_division=0)
+    
+    return {
+        "loss": running_loss / len(loader) if len(loader) > 0 else 0.0,
+        "accuracy": acc,
+        "precision": prec,
+        "recall": rec,
+        "f1_score": f1
+    }
 
 def main(args):
     config = load_config()

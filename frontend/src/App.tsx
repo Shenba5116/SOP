@@ -6,12 +6,7 @@ import Research from './pages/Research';
 import HowAIWorks from './pages/HowAIWorks';
 import Learn from './pages/Learn';
 import About from './pages/About';
-// Other pages will be created shortly, using placeholders for now
-const Placeholder = ({ title }: { title: string }) => (
-  <div className="flex h-screen items-center justify-center">
-    <h1 className="text-3xl font-bold text-gray-700">{title}</h1>
-  </div>
-);
+import History from './pages/History';
 
 function App() {
   return (
@@ -25,7 +20,7 @@ function App() {
             <Route path="/how-ai-works" element={<HowAIWorks />} />
             <Route path="/analyze" element={<Analyze />} />
             <Route path="/research" element={<Research />} />
-            <Route path="/history" element={<Placeholder title="History Page" />} />
+            <Route path="/history" element={<History />} />
             <Route path="/about" element={<About />} />
           </Routes>
         </main>

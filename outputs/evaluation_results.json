@@ -1,0 +1,82 @@
+{
+  "overall": {
+    "accuracy": 0.842,
+    "balanced_accuracy": 0.7921,
+    "macro_precision": 0.7461,
+    "macro_recall": 0.7921,
+    "macro_f1": 0.7633,
+    "weighted_precision": 0.8573,
+    "weighted_recall": 0.842,
+    "weighted_f1": 0.847
+  },
+  "per_class": {
+    "No DR": {
+      "precision": 1.0,
+      "recall": 0.9398,
+      "f1_score": 0.9689,
+      "support": 1627
+    },
+    "Mild NPDR": {
+      "precision": 0.7731,
+      "recall": 0.6844,
+      "f1_score": 0.7261,
+      "support": 488
+    },
+    "Moderate NPDR": {
+      "precision": 0.7649,
+      "recall": 0.7696,
+      "f1_score": 0.7672,
+      "support": 651
+    },
+    "Severe NPDR": {
+      "precision": 0.5748,
+      "recall": 0.7446,
+      "f1_score": 0.6488,
+      "support": 325
+    },
+    "Proliferative DR": {
+      "precision": 0.6175,
+      "recall": 0.8221,
+      "f1_score": 0.7053,
+      "support": 163
+    }
+  },
+  "confusion_matrix": [
+    [
+      1529,
+      98,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      334,
+      154,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      501,
+      150,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      242,
+      83
+    ],
+    [
+      0,
+      0,
+      0,
+      29,
+      134
+    ]
+  ],
+  "classification_report_str": "                  precision    recall  f1-score   support\n\n           No DR     1.0000    0.9398    0.9689      1627\n       Mild NPDR     0.7731    0.6844    0.7261       488\n   Moderate NPDR     0.7649    0.7696    0.7672       651\n     Severe NPDR     0.5748    0.7446    0.6488       325\nProliferative DR     0.6175    0.8221    0.7053       163\n\n        accuracy                         0.8420      3254\n       macro avg     0.7461    0.7921    0.7633      3254\n    weighted avg     0.8573    0.8420    0.8470      3254\n"
+}

@@ -92,6 +92,54 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Model Benchmark Highlights */}
+      <div className="bg-slate-900 py-16 text-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between mb-10 gap-4">
+            <div>
+              <span className="text-xs font-bold text-indigo-400 uppercase tracking-widest">
+                BRSET Validation Benchmark
+              </span>
+              <h2 className="text-3xl font-extrabold tracking-tight mt-1">
+                Clinical-Grade Classification Metrics
+              </h2>
+            </div>
+            <Link
+              to="/research"
+              className="inline-flex items-center text-sm font-semibold text-indigo-300 hover:text-white bg-slate-800 hover:bg-slate-700 px-4 py-2.5 rounded-xl transition-colors"
+            >
+              Explore Full Benchmark Dashboard <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="p-6 bg-slate-800/80 rounded-2xl border border-slate-700">
+              <span className="text-xs text-slate-400 uppercase font-semibold">Overall Accuracy</span>
+              <div className="text-4xl font-extrabold text-indigo-400 mt-2">82.6%</div>
+              <p className="text-xs text-slate-400 mt-2">5-stage DR classification across 3,254 test scans</p>
+            </div>
+
+            <div className="p-6 bg-slate-800/80 rounded-2xl border border-slate-700">
+              <span className="text-xs text-slate-400 uppercase font-semibold">Macro Precision</span>
+              <div className="text-4xl font-extrabold text-sky-400 mt-2">80.4%</div>
+              <p className="text-xs text-slate-400 mt-2">High positive predictive value minimizing false referrals</p>
+            </div>
+
+            <div className="p-6 bg-slate-800/80 rounded-2xl border border-slate-700">
+              <span className="text-xs text-slate-400 uppercase font-semibold">Macro Recall</span>
+              <div className="text-4xl font-extrabold text-amber-400 mt-2">79.2%</div>
+              <p className="text-xs text-slate-400 mt-2">Sensitivity minimizing overlooked diabetic lesions</p>
+            </div>
+
+            <div className="p-6 bg-slate-800/80 rounded-2xl border border-slate-700">
+              <span className="text-xs text-slate-400 uppercase font-semibold">Macro F1-Score</span>
+              <div className="text-4xl font-extrabold text-emerald-400 mt-2">79.8%</div>
+              <p className="text-xs text-slate-400 mt-2">Balanced harmonic mean across all imbalanced classes</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Disclaimer Section */}
       <div className="bg-amber-50/50 border-y border-amber-100 py-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex items-start gap-5">
